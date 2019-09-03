@@ -1,4 +1,0 @@
-/Users/kaitlinwilkinson/work/ContosoCrafts/src/obj/Debug/netcoreapp2.2/ContosoCrafts.WebSite.csprojAssemblyReference.cache
-/Users/kaitlinwilkinson/work/ContosoCrafts/src/obj/Debug/netcoreapp2.2/ContosoCrafts.WebSite.csproj.CoreCompileInputs.cache
-/Users/kaitlinwilkinson/work/ContosoCrafts/src/obj/Debug/netcoreapp2.2/ContosoCrafts.WebSite.AssemblyInfoInputs.cache
-/Users/kaitlinwilkinson/work/ContosoCrafts/src/obj/Debug/netcoreapp2.2/ContosoCrafts.WebSite.AssemblyInfo.cs

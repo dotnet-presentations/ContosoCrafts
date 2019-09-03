@@ -7,33 +7,32 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/ContosoCrafts.sln",
+                "${workspaceFolder}/src/ContosoCrafts.WebSite.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "publish webapp",
+            "label": "publish",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/ContosoCrafts.WebSite/ContosoCrafts.WebSite.csproj",
+                "${workspaceFolder}/src/ContosoCrafts.WebSite.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "watch webapp",
+            "label": "watch",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "watch",
-                "--project",
-                "${workspaceFolder}/ContosoCrafts.WebSite/ContosoCrafts.WebSite.csproj",
                 "run",
+                "${workspaceFolder}/src/ContosoCrafts.WebSite.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
