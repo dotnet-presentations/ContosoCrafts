@@ -60,7 +60,7 @@ namespace ContosoCrafts.WebSite
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
-                endpoints.MapBlazorHub<ProductList>("productList");
+                endpoints.MapBlazorHub();
 
                 // endpoints.MapGet("/products", (context) => 
                 // {
