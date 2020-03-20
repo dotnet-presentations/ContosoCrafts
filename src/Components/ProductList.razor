@@ -21,39 +21,40 @@
 }
 </div>
 
-@if(selectedProduct != null)
-{
-  <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productTitle" aria-hidden="true">
+
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="productTitle">@selectedProduct.Title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="card">
-            <div class="card-img" style="background-image: url('@selectedProduct.Image');">
+        @if(selectedProduct != null)
+        {
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productTitle">@selectedProduct.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="card-body">
-                <p class="card-text">@selectedProduct.Description</p>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-img" style="background-image: url('@selectedProduct.Image');">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">@selectedProduct.Description</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          @if(voteCount == 0)
-          {
-            <span>Be the first to vote!</span>
-          }
-          else
-          {
-            <span>@voteCount @voteLabel</span>
-          }
-          @for(int i=1; i<6; i++)
-          {
-            var currentStar = i;
-            if(i<=currentRating)
+            <div class="modal-footer">
+                @if(voteCount == 0)
+                {
+                <span>Be the first to vote!</span>
+                }
+                else
+                {
+                <span>@voteCount @voteLabel</span>
+                }
+                @for(int i=1; i<6; i++)
+                                   {
+                                   var currentStar=i;
+                                   if(i<=currentRating)
             {
               <span class="fa fa-star checked" @onclick="(e => SubmitRating(currentStar))"></span>
             }
@@ -62,11 +63,11 @@
               <span class="fa fa-star" @onclick="(e => SubmitRating(currentStar))"></span>
             }
           }
+            </div>
         </div>
-      </div>
+        }
     </div>
-  </div>
-}
+</div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
