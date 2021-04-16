@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.podinfod: glob:v*
+  name:  contoso
+  namespace: default
+  labels:
+    app:  contoso
+spec:
+  selector:
+    matchLabels:
+      app: contoso
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  contoso
+    spec:
+      containers:
+      - name:  contoso
+        image:  navjots35/dotnet:v1
+        ports:
+        - containerPort:  80
