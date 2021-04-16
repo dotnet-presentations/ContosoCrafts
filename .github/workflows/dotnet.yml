@@ -35,6 +35,10 @@ jobs:
     - name: Set up Docker Buildx
       id: buildx
       uses: docker/setup-buildx-action@v1
+      
+    - name: Get the Version
+      id: vars
+      run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
 
     - name: Build and push
       id: docker_build
@@ -43,7 +47,7 @@ jobs:
         context: ./
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/dotnet:v1
+        tags: ${{ secrets.DOCKER_USERNAME }}/dotnet:${{steps.vars.outputs.tag}}
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
