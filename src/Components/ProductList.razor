@@ -6,21 +6,21 @@
 <div class="card-columns">
     @foreach (var product in ProductService.GetProducts())
     {
-            <div class="card">
-                <div class="card-img" style="background-image: url('@product.Image');">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">@product.Title</h5>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">
-                        <button @onclick="(e => SelectProduct(product.Id))"
-                        data-toggle="modal" data-target="#productModal" class="btn btn-primary">
-                            More Info
-                        </button>
-                    </small>
-                </div>
+        <div class="card">
+            <div class="card-img" style="background-image: url('@product.Image');">
             </div>
+            <div class="card-body">
+                <h5 class="card-title">@product.Title</h5>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">
+                    <button @onclick="(e => SelectProduct(product.Id))"
+                        data-toggle="modal" data-target="#productModal" class="btn btn-primary">
+                        More Info
+                    </button>
+                </small>
+            </div>
+        </div>
     }
 </div>
 
@@ -29,45 +29,45 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         @if (selectedProduct != null)
         {
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="productTitle">@selectedProduct.Title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card">
-                            <div class="card-img" style="background-image: url('@selectedProduct.Image');">
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">@selectedProduct.Description</p>
-                            </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productTitle">@selectedProduct.Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('@selectedProduct.Image');">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">@selectedProduct.Description</p>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                </div>
+                <div class="modal-footer">
                     @if (voteCount == 0)
                     {
-                                <span>Be the first to vote!</span>
+                        <span>Be the first to vote!</span>
                     }
                     else
                     {
-                                <span>@voteCount @voteLabel</span>
+                        <span>@voteCount @voteLabel</span>
                     }
                     @for (int i = 1; i < 6; i++)
                     {
                         var currentStar = i;
                         if (i <= currentRating)
                         {
-                                        <span class="fa fa-star checked" @onclick="(e => SubmitRating(currentStar))"></span>
+                            <span class="fa fa-star checked" @onclick="(e => SubmitRating(currentStar))"></span>
                         }
                         else
                         {
-                                        <span class="fa fa-star" @onclick="(e => SubmitRating(currentStar))"></span>
+                            <span class="fa fa-star" @onclick="(e => SubmitRating(currentStar))"></span>
                         }
                     }
-                    </div>
                 </div>
+            </div>
         }
     </div>
 </div>
