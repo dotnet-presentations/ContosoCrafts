@@ -14,7 +14,7 @@
             </div>
             <div class="card-footer">
                 <small class="text-muted">
-                    <button @onclick="(e => SelectProduct(product.Id))"
+                    <button @onclick="(e => SelectProduct(product?.Id ?? string.Empty))"
                         data-toggle="modal" data-target="#productModal" class="btn btn-primary">
                         More Info
                     </button>
@@ -76,8 +76,8 @@
 
 @code
 {
-    Product selectedProduct;
-    string selectedProductId;
+    Product? selectedProduct;
+    string? selectedProductId;
 
     void SelectProduct(string productId)
     {
@@ -88,11 +88,11 @@
 
     int currentRating = 0;
     int voteCount = 0;
-    string voteLabel;
+    string? voteLabel;
 
     void GetCurrentRating()
     {
-        if (selectedProduct.Ratings == null)
+        if (selectedProduct?.Ratings == null)
         {
             currentRating = 0;
             voteCount = 0;
@@ -104,12 +104,14 @@
             currentRating = selectedProduct.Ratings.Sum() / voteCount;
         }
 
-        System.Console.WriteLine($"Current rating for {selectedProduct.Id}: {currentRating}");
+        System.Console.WriteLine($"Current rating for {selectedProduct?.Id}: {currentRating}");
     }
 
     void SubmitRating(int rating)
     {
-        System.Console.WriteLine($"Rating received for {selectedProduct.Id}: {rating}");
+        System.Console.WriteLine($"Rating received for {selectedProduct?.Id}: {rating}");
+        if (selectedProductId == null)
+            return;
         ProductService.AddRating(selectedProductId, rating);
         SelectProduct(selectedProductId);
     }
