@@ -17,16 +17,13 @@ namespace ContosoCrafts.WebSite.Controllers
         public JsonFileProductService ProductService { get; }
 
         [HttpGet]
-        public IEnumerable<Product> Get()
-        {
-            return ProductService.GetProducts();
-        }
+        public IEnumerable<Product> Get() => ProductService.GetProducts();
 
         [HttpPatch]
         public ActionResult Patch([FromBody] RatingRequest request)
         {
             ProductService.AddRating(request.ProductId, request.Rating);
-            
+
             return Ok();
         }
 

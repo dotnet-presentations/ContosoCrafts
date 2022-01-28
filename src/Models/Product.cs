@@ -16,7 +16,5 @@ namespace ContosoCrafts.WebSite.Models
         public int[] Ratings { get; set; }
 
         public override string ToString() => JsonSerializer.Serialize<Product>(this);
-
- 
     }
 }

@@ -4,83 +4,86 @@
 @inject JsonFileProductService ProductService
 
 <div class="card-columns">
-@foreach (var product in ProductService.GetProducts())
-{
-    <div class="card">
-        <div class="card-img" style="background-image: url('@product.Image');">
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">@product.Title</h5>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted"><button @onclick="(e => SelectProduct(product.Id))" 
-              data-toggle="modal" data-target="#productModal" class="btn btn-primary">More Info</button>
-            </small>
-        </div>
-    </div>
-}
+    @foreach (var product in ProductService.GetProducts())
+    {
+            <div class="card">
+                <div class="card-img" style="background-image: url('@product.Image');">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@product.Title</h5>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">
+                        <button @onclick="(e => SelectProduct(product.Id))"
+                        data-toggle="modal" data-target="#productModal" class="btn btn-primary">
+                            More Info
+                        </button>
+                    </small>
+                </div>
+            </div>
+    }
 </div>
 
 
 <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        @if(selectedProduct != null)
+        @if (selectedProduct != null)
         {
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="productTitle">@selectedProduct.Title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <div class="card-img" style="background-image: url('@selectedProduct.Image');">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productTitle">@selectedProduct.Title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">@selectedProduct.Description</p>
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-img" style="background-image: url('@selectedProduct.Image');">
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">@selectedProduct.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    @if (voteCount == 0)
+                    {
+                                <span>Be the first to vote!</span>
+                    }
+                    else
+                    {
+                                <span>@voteCount @voteLabel</span>
+                    }
+                    @for (int i = 1; i < 6; i++)
+                    {
+                        var currentStar = i;
+                        if (i <= currentRating)
+                        {
+                                        <span class="fa fa-star checked" @onclick="(e => SubmitRating(currentStar))"></span>
+                        }
+                        else
+                        {
+                                        <span class="fa fa-star" @onclick="(e => SubmitRating(currentStar))"></span>
+                        }
+                    }
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                @if(voteCount == 0)
-                {
-                <span>Be the first to vote!</span>
-                }
-                else
-                {
-                <span>@voteCount @voteLabel</span>
-                }
-                @for(int i=1; i<6; i++)
-                                   {
-                                   var currentStar=i;
-                                   if(i<=currentRating)
-            {
-              <span class="fa fa-star checked" @onclick="(e => SubmitRating(currentStar))"></span>
-            }
-            else
-            {
-              <span class="fa fa-star" @onclick="(e => SubmitRating(currentStar))"></span>
-            }
-          }
-            </div>
-        </div>
         }
     </div>
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-@code 
+@code
 {
     Product selectedProduct;
     string selectedProductId;
 
     void SelectProduct(string productId)
     {
-      selectedProductId = productId;
-      selectedProduct = ProductService.GetProducts().First(x => x.Id == productId);
-      GetCurrentRating();
+        selectedProductId = productId;
+        selectedProduct = ProductService.GetProducts().First(x => x.Id == productId);
+        GetCurrentRating();
     }
 
     int currentRating = 0;
@@ -89,25 +92,25 @@
 
     void GetCurrentRating()
     {
-      if(selectedProduct.Ratings == null)
-      {
-        currentRating = 0;
-        voteCount = 0;
-      }
-      else
-      {
-        voteCount = selectedProduct.Ratings.Count();
-        voteLabel = voteCount > 1 ? "Votes" : "Vote";
-        currentRating = selectedProduct.Ratings.Sum() / voteCount;
-      }
+        if (selectedProduct.Ratings == null)
+        {
+            currentRating = 0;
+            voteCount = 0;
+        }
+        else
+        {
+            voteCount = selectedProduct.Ratings.Count();
+            voteLabel = voteCount > 1 ? "Votes" : "Vote";
+            currentRating = selectedProduct.Ratings.Sum() / voteCount;
+        }
 
-      System.Console.WriteLine($"Current rating for {selectedProduct.Id}: {currentRating}");
+        System.Console.WriteLine($"Current rating for {selectedProduct.Id}: {currentRating}");
     }
 
     void SubmitRating(int rating)
     {
-      System.Console.WriteLine($"Rating received for {selectedProduct.Id}: {rating}");
-      ProductService.AddRating(selectedProductId, rating);
-      SelectProduct(selectedProductId);
+        System.Console.WriteLine($"Rating received for {selectedProduct.Id}: {rating}");
+        ProductService.AddRating(selectedProductId, rating);
+        SelectProduct(selectedProductId);
     }
 }
