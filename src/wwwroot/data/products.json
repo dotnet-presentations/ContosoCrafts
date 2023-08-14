@@ -54,7 +54,12 @@
     "Url": "https://twitter.com/sailorhg/status/1090113666911891456",
     "Title": "Light-up Corsage",
     "Description": "Light-up corsage I made with my summer intern.",
-    "Ratings": null
+    "Ratings": [
+      5,
+      2,
+      1,
+      5
+    ]
   },
   {
     "Id": "sailorhg-kit",
@@ -63,7 +68,15 @@
     "Url": "https://twitter.com/sailorhg/status/1090122822007963648",
     "Title": "Pastel hardware kit",
     "Description": "Pastel hardware kits complete with custom manufactured pastel alligator clips.",
-    "Ratings": null
+    "Ratings": [
+      5,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
   },
   {
     "Id": "sailorhg-led",
